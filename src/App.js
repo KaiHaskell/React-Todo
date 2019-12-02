@@ -1,6 +1,7 @@
 import React from "react";
 import TodoForm from "./components/TodoComponents/TodoForm";
 import ToDoList from "./components/TodoComponents/TodoList";
+import "./components/TodoComponents/Todo.css";
 
 const toDoArray = [
   {
@@ -40,6 +41,31 @@ class App extends React.Component {
       toDoArray: [...this.state.toDoArray, newItem]
     });
   };
+
+  clearCompleted = () => {
+    this.setState({
+      toDoArray: this.state.toDoArray.filter(item => {
+        if (item.completed === false) {
+          return {};
+        }
+      })
+    });
+  };
+
+  toggleCompleted = id => {
+    this.setState({
+      toDoArray: this.state.toDoArray.map(item => {
+        if (item.id === id) {
+          return {
+            ...item,
+            completed: !item.completed
+          };
+        } else {
+          return item;
+        }
+      })
+    });
+  };
   // you will need a place to store your state in this component.
   // design `App` to be the parent component of your application.
   // this component is going to take care of state, and any change handlers you need to work with your state
@@ -47,9 +73,15 @@ class App extends React.Component {
     return (
       <div>
         <div className="list-container">
-          <TodoForm addItem={this.addItem} />
+          <TodoForm
+            addItem={this.addItem}
+            clearCompleted={this.clearCompleted}
+          />
         </div>
-        <ToDoList toDoArray={this.state.toDoArray} />
+        <ToDoList
+          toggleCompleted={this.toggleCompleted}
+          toDoArray={this.state.toDoArray}
+        />
       </div>
     );
   }
