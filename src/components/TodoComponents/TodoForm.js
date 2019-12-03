@@ -1,4 +1,5 @@
 import React from "react";
+import "./unite.css";
 
 class TodoForm extends React.Component {
   constructor() {
@@ -27,8 +28,16 @@ class TodoForm extends React.Component {
           type="text"
           name="item"
         />
-        <button>Add</button>
-        <button onClick={this.props.clearCompleted}>Clear</button>
+        <div className="btn-container">
+          <button class="bttn-unite bttn-md bttn-primary">Add</button>
+
+          <button
+            onClick={this.props.clearCompleted}
+            class="bttn-unite bttn-md bttn-primary"
+          >
+            Clear
+          </button>
+        </div>
       </form>
     );
   }
